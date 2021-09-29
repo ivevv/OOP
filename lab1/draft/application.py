@@ -9,25 +9,25 @@ class TApplication:
         print("2. Solve equation.")
         print("3. Input x and solve polinom.")
         print("4. Print polinom.")
-        print("5. Quit.")
+        print("0. Quit.")
 
     @staticmethod
     def enter_polinom(poli: TPolinom):
         print("Polinom is a*x^2 + b*x + c")
-        print("a = ")
-        a = float(input())  # check if a =/= 0
+        # print("a = ")
+        a = float(input("a = "))  # check if a =/= 0
         while a == 0:
             print("a =/= 0")
             print("a = ")
             a = float(input())
-        print("b = ")
-        b = float(input())  # check if b =/= 0
+        # print("b = ")
+        b = float(input("b = "))  # check if b =/= 0
         while b == 0:
             print("b =/= 0")
             print("b = ")
             b = float(input())
-        print("c = ")
-        c = float(input())  # check if c =/= 0
+        # print("c = ")
+        c = float(input("c = "))  # check if c =/= 0
         while c == 0:
             print("c =/= 0")
             print("c = ")
@@ -47,8 +47,8 @@ class TApplication:
 
     @staticmethod
     def solve_polinom(poli: TPolinom):
-        print("x = ")
-        x = float(input())
+        # print("x = ")
+        x = float(input("x = "))
         while x == 0:
             print("x =/= 0")
             print("x = ")
