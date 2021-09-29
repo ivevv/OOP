@@ -16,29 +16,44 @@ class TApplication:
         print("Polinom is a*x^2 + b*x + c")
         print("a = ")
         a = float(input())  # check if a =/= 0
+        while a == 0:
+            print("a =/= 0")
+            print("a = ")
+            a = float(input())
         print("b = ")
-        b = float(input())  # check if b =/=0
+        b = float(input())  # check if b =/= 0
+        while b == 0:
+            print("b =/= 0")
+            print("b = ")
+            b = float(input())
         print("c = ")
         c = float(input())  # check if c =/= 0
+        while c == 0:
+            print("c =/= 0")
+            print("c = ")
+            c = float(input())
         poli.set_a(a)
         poli.set_b(b)
         poli.set_c(c)
 
     @staticmethod
     def get_unknowns(poli: TPolinom):
-        x1 = poli.get_x1()
-        x2 = poli.get_x2()
-        s = "x1 = " + repr(x1)
-        print(s)
-        s = "x2 = " + repr(x2)
-        print(s)
+        check = poli.get_discriminant()
+        if check:
+            print("x1 = " + repr(poli.get_x1()))
+            print("x2 = " + repr(poli.get_x2()))
+        else:
+            print("This equation doesn't have a solution!")
 
     @staticmethod
     def solve_polinom(poli: TPolinom):
         print("x = ")
         x = float(input())
-        s = poli.solve(x)
-        print(repr(s))
+        while x == 0:
+            print("x =/= 0")
+            print("x = ")
+            x = float(input())
+        print("Your result: " + repr(poli.solve(x)))
 
     @staticmethod
     def print_polinom(poli: TPolinom):
