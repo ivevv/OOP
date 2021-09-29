@@ -19,11 +19,6 @@ class TPolinom:
 
     def get_discriminant(self):
         self.d = math.pow(self.b, 2) - 4 * self.a * self.c
-        # print(self.d)
-        if self.d < 0:
-            return False
-        else:
-            return True
 
     def get_x1(self):
         x1 = (math.sqrt(self.d) - self.b) / (2 * self.a)
@@ -33,7 +28,6 @@ class TPolinom:
         x2 = (0 - math.sqrt(self.d) - self.b) / (2 * self.a)
         return x2
 
-    # temporary name
-    def solve(self, x):
+    def calculate_w_x(self, x):
         s = self.a * math.pow(x, 2) + self.b * x + self.c
         return s
