@@ -57,4 +57,13 @@ class TApplication:
 
     @staticmethod
     def print_polinom(poli: TPolinom):
-        pass
+        s = repr(poli.a) + "x^2 "
+        if poli.b > 0:
+            s += "+" + repr(poli.b) + "x "
+        else:
+            s += repr(poli.b) + "x "
+        if poli.c > 0:
+            s += "+" + repr(poli.c)
+        else:
+            s += repr(poli.c)
+        print(s)
