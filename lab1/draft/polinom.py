@@ -3,10 +3,10 @@ import math
 
 # polinom: ax^2 + bx + c = 0
 class TPolinom:
-    d = 0.0
-    a = 0.0
-    b = 0.0
-    c = 0.0
+    d: float
+    a: float
+    b: float
+    c: float
 
     def set_a(self, a):
         self.a = a
