@@ -1,3 +1,6 @@
+from math import sqrt
+
+
 class TPolinom:
     def __init__(self, a, b, c):
         self.a = a
@@ -8,7 +11,7 @@ class TPolinom:
         return self.b**2-4*self.a*self.c
 
     def get_roots(self):
-        d = self.d()
+        d = sqrt(self.d())
         x1 = (-self.b+d)/2*self.a
         x2 = (-self.b-d)/2*self.a
         return x1, x2
