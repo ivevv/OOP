@@ -1,0 +1,2 @@
+class number(float):
+    pass
