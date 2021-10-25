@@ -24,7 +24,7 @@ class TPolinom:
     def __str__(self):
         s = f'{self.a}x²'
         if self.b > 0:
-            s += f' + {self.b} + x '
+            s += f' + {self.b}x '
         else:
             s += f' {self.b}x'
         if self.c > 0:
