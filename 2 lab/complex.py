@@ -1,14 +1,8 @@
-from math import sqrt
+from math import sqrt, atan, pi, cos, sin
 from typing import Union
 
 
 class TComplex(object):
-    def __new__(
-        cls,
-        real: Union[int, float] = 0,
-        imag: Union[int, float] = 0,
-    ):
-        return complex(real, imag)
 
     def __init__(
         self,
@@ -22,17 +16,68 @@ class TComplex(object):
         self.real = real
         self.imag = imag
 
+    @property
+    def phi(self): #получение угла fi от компл. числа
+        a = self.real
+        b = self.imag
+        if a > 0 and b > 0:
+            return atan(b / a)
+        elif a > 0 and b < 0:
+            return -atan(b / a)
+        elif a < 0 and b > 0:
+            return pi-atan(b / a)
+        elif a < 0 and b < 0:
+            return -pi+atan(b/a)
+        elif a == 0 and b > 0:
+            return pi/2
+        elif a == 0 and b < 0:
+            return -pi/2
+        elif a > 0 and b == 0:
+            return 0
+        elif a < 0 and b == 0:
+            return pi/2
+
+    @property
+    def sqrt(self):
+        r = abs(self)
+        phi = self.phi
+        sr = sqrt(r)
+        phi2 = phi/2
+        a = sr * cos(phi2)
+        b = sr * sin(phi2)
+        return TComplex(a, b)
+
     def __sub__(self, other):
         other = self.check_other(other)
         return TComplex(self.real - other.real, self.imag - other.imag)
 
-    # нужно ещё перегрузить pow, добавить метод sqrt
 
-    def __pow__(self, other):
-        other = self.check_other(other)
+
+    def __neg__(self):
+        return TComplex(-self.real, -self.imag)
+
+    def __pow__(self, other: int):
+        n = other
+        r = abs(self)
+        phi = self.phi
+        rn = r**n
+        nphi = n*phi
+        a = rn * cos(nphi)
+        b = rn * sin(nphi)
+        return TComplex(a, b)
 
     def __abs__(self):
         return sqrt(self.real ** 2 + self.imag ** 2)
+
+    def __truediv__(self, other):
+        other = self.check_other(other)
+        a1 = self.real
+        b1 = self.imag
+        a2 = other.real
+        b2 = other.imag
+        new_a = (a1*a2+b1*b2)/(a2**2+b2**2)
+        new_b = (a2 * b1 - a1 * b2) / (a2 ** 2 + b2 ** 2)
+        return TComplex(new_a, new_b)
 
     def __add__(self, other):
         other = self.check_other(other)
@@ -57,12 +102,11 @@ class TComplex(object):
         return self.real < other.real
 
     def __str__(self):
-        s = f'({self.real}'
         if self.imag > 0:
-            s += f' + {self.imag}i)'
-        else:
-            s += f' {self.imag}i)'
-        return s
+            return f'({self.real} + {self.imag}i)'
+        elif self.imag < 0:
+            return f'({self.real} - {-self.imag}i)'
+        return f'{self.real}'
 
     def check_other(self, other):
         if isinstance(other, int) or isinstance(other, float):

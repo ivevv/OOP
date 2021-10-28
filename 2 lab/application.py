@@ -53,7 +53,9 @@ class TApplication:
     def solve_equation(self):
         d = self.polinom.d()
         if d < 0:
-            print('Discriminant is less than zero, there is no solution')
+            x1, x2 = self.polinom.get_roots()
+            print('x1 =', x1)
+            print('x2 =', x2)
         elif d == 0:
             x, _ = self.polinom.get_roots()
             print('x1 = x2 =', x)
