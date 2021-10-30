@@ -1,5 +1,11 @@
-from math import sqrt, atan, pi, cos, sin
+from math import sqrt as msqrt, atan, pi, cos, sin
 from typing import Union
+
+
+def sqrt(x):
+    if isinstance(x, TComplex):
+        return x.sqrt
+    return msqrt(x)
 
 
 class TComplex(object):

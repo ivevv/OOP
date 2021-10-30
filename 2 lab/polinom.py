@@ -1,11 +1,5 @@
-from math import sqrt as msqrt
+from complex import sqrt
 from numberh import number
-
-
-def sqrt(x):
-    if isinstance(x, number):
-        return x.sqrt
-    return msqrt(x)
 
 
 class TPolinom:
@@ -15,12 +9,12 @@ class TPolinom:
         self.c = c
 
     def d(self):
-        return number(self.b**2-self.a*4*self.c)
+        return self.b**2-self.a*4*self.c
 
     def get_roots(self):
         d = sqrt(self.d())
-        x1 = (-self.b+d)/(2*self.a)
-        x2 = (-self.b-d)/(2*self.a)
+        x1 = (-self.b+d)/(self.a*2)
+        x2 = (-self.b-d)/(self.a*2)
         return x1, x2
 
     def get_value(self, x):

@@ -1,6 +1,7 @@
 from polinom import TPolinom
 from numberh import number
 
+
 class TApplication:
     def __init__(self):
         self.menu_text = (
