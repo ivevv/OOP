@@ -1,5 +1,5 @@
 from polinom import TPolinom
-
+from numberh import number
 
 class TApplication:
     def __init__(self):
@@ -37,7 +37,8 @@ class TApplication:
         elif self.option == '2':
             self.solve_equation()
         elif self.option == '3':
-            x = int(input('x = '))
+            r, i = map(float, input('x = ').split())
+            x = number(r, i)
             self.calculate_polinom(x)
         elif self.option == '4':
             print(self.polinom)
@@ -45,9 +46,12 @@ class TApplication:
             print('=====> Unknown option')
 
     def enter_polinom(self):
-        a = int(input('a = '))
-        b = int(input('b = '))
-        c = int(input('c = '))
+        r, i = map(float, input('a = ').split())
+        a = number(r, i)
+        r, i = map(float, input('b = ').split())
+        b = number(r, i)
+        r, i = map(float, input('c = ').split())
+        c = number(r, i)
         self.polinom = TPolinom(a, b, c)
 
     def solve_equation(self):
@@ -66,7 +70,7 @@ class TApplication:
 
     def calculate_polinom(self, x):
         value = self.polinom.get_value(x)
-        print(f'Value of polinom {self.polinom} with x={x} is {value}')
+        print(f'Value of polinom {self.polinom} with x = {x} is {value}')
 
     def print_polinom(self):
         print(self.polinom)

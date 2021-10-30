@@ -1,26 +1,26 @@
 from math import sqrt as msqrt
-from complex import TComplex
+from numberh import number
 
 
 def sqrt(x):
-    if isinstance(x, TComplex):
+    if isinstance(x, number):
         return x.sqrt
     return msqrt(x)
 
 
 class TPolinom:
-    def __init__(self, a, b, c):
-        self.a = TComplex(a)
-        self.b = TComplex(b)
-        self.c = TComplex(c)
+    def __init__(self, a: number, b: number, c: number):
+        self.a = a
+        self.b = b
+        self.c = c
 
     def d(self):
-        return self.b**2-self.a*4*self.c
+        return number(self.b**2-self.a*4*self.c)
 
     def get_roots(self):
         d = sqrt(self.d())
-        x1 = ((-self.b+d)*2)/self.a
-        x2 = ((-self.b-d)*2)/self.a
+        x1 = (-self.b+d)/(2*self.a)
+        x2 = (-self.b-d)/(2*self.a)
         return x1, x2
 
     def get_value(self, x):

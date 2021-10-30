@@ -7,7 +7,7 @@ class TComplex(object):
     def __init__(
         self,
         real: Union[int, float] = 0,
-        imag: Union[int, float] = 0,
+        imag: Union[int, float] = 0
     ):
         """
         :param real: вещественная часть
@@ -17,7 +17,7 @@ class TComplex(object):
         self.imag = imag
 
     @property
-    def phi(self): #получение угла fi от компл. числа
+    def phi(self): # получение угла fi от компл. числа
         a = self.real
         b = self.imag
         if a > 0 and b > 0:
@@ -50,8 +50,6 @@ class TComplex(object):
     def __sub__(self, other):
         other = self.check_other(other)
         return TComplex(self.real - other.real, self.imag - other.imag)
-
-
 
     def __neg__(self):
         return TComplex(-self.real, -self.imag)
@@ -110,7 +108,7 @@ class TComplex(object):
 
     def check_other(self, other):
         if isinstance(other, int) or isinstance(other, float):
-            other = TComplex(other)
+            other = TComplex(other, 0)
         if not isinstance(other, TComplex):
             pass
         return other
