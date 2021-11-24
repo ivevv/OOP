@@ -107,10 +107,10 @@ class TComplex(object):
 
     def __str__(self):
         if self.imag > 0:
-            return f'({self.real} + {self.imag}i)'
+            return f'({self.real:.1f} + {self.imag:.1f}i)'
         elif self.imag < 0:
-            return f'({self.real} - {-self.imag}i)'
-        return f'{self.real}'
+            return f'({self.real:.1f} - {-self.imag:.1f}i)'
+        return f'{self.real:.1f}'
 
     def check_other(self, other):
         if isinstance(other, int) or isinstance(other, float):

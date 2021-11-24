@@ -9,12 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from polinom import TPolinom
+from numberh import number
 
 
 class TInterface(object):
     def setupUi(self, Application):
         Application.setObjectName("Application")
-        Application.resize(840, 352)
+        Application.resize(720, 382)
         font = QtGui.QFont()
         font.setPointSize(14)
         Application.setFont(font)
@@ -26,79 +28,82 @@ class TInterface(object):
         self.bracket1.setTextFormat(QtCore.Qt.PlainText)
         self.bracket1.setScaledContents(False)
         self.bracket1.setObjectName("bracket1")
-        self.ar = QtWidgets.QTextEdit(Application)  # вещественная часть коэффициента a
+        self.ar = QtWidgets.QLineEdit(Application)  # вещественная часть коэффициента a
         self.ar.setGeometry(QtCore.QRect(30, 10, 61, 41))
         self.ar.setObjectName("ar")
         self.plus1 = QtWidgets.QLabel(Application)
         self.plus1.setGeometry(QtCore.QRect(100, 10, 21, 31))
         self.plus1.setObjectName("plus1")
-        self.ai = QtWidgets.QTextEdit(Application)  # мнимая часть коэффициента a
+        self.ai = QtWidgets.QLineEdit(Application)  # мнимая часть коэффициента a
         self.ai.setGeometry(QtCore.QRect(120, 10, 61, 41))
         self.ai.setObjectName("ai")
         self.a_coefficient = QtWidgets.QLabel(Application)
         self.a_coefficient.setGeometry(QtCore.QRect(190, 10, 81, 31))
         self.a_coefficient.setObjectName("a_coefficient")
-        self.br = QtWidgets.QTextEdit(Application)  # вещественная часть коэффициента b
+        self.br = QtWidgets.QLineEdit(Application)  # вещественная часть коэффициента b
         self.br.setGeometry(QtCore.QRect(270, 10, 61, 41))
         self.br.setObjectName("br")
         self.plus2 = QtWidgets.QLabel(Application)
         self.plus2.setGeometry(QtCore.QRect(340, 10, 21, 31))
         self.plus2.setObjectName("plus2")
-        self.bi = QtWidgets.QTextEdit(Application)  # мнимая часть коэффициента b
+        self.bi = QtWidgets.QLineEdit(Application)  # мнимая часть коэффициента b
         self.bi.setGeometry(QtCore.QRect(360, 10, 61, 41))
         self.bi.setObjectName("bi")
         self.b_coefficient = QtWidgets.QLabel(Application)
         self.b_coefficient.setGeometry(QtCore.QRect(430, 10, 71, 31))
         self.b_coefficient.setObjectName("b_coefficient")
-        self.cr = QtWidgets.QTextEdit(Application)
+        self.cr = QtWidgets.QLineEdit(Application)
         self.cr.setGeometry(QtCore.QRect(500, 10, 61, 41))
         self.cr.setObjectName("cr")  # вещественная часть коэффициента c
-        self.ci = QtWidgets.QTextEdit(Application)
+        self.ci = QtWidgets.QLineEdit(Application)
         self.ci.setGeometry(QtCore.QRect(590, 10, 61, 41))
         self.ci.setObjectName("ci")  # мнимая часть коэффициента c
         self.c_coefficient = QtWidgets.QLabel(Application)
         self.c_coefficient.setGeometry(QtCore.QRect(660, 10, 51, 31))
         self.c_coefficient.setObjectName("c_coefficient")
+        self.equal = QtWidgets.QLabel(Application)
+        self.equal.setGeometry(QtCore.QRect(20, 70, 51, 31))
+        self.equal.setObjectName("equal")
         self.x_label = QtWidgets.QLabel(Application)
-        self.x_label.setGeometry(QtCore.QRect(20, 70, 55, 51))
+        self.x_label.setGeometry(QtCore.QRect(20, 100, 55, 51))
         self.x_label.setObjectName("x_label")
-        self.xr = QtWidgets.QTextEdit(Application)
-        self.xr.setGeometry(QtCore.QRect(70, 80, 61, 41))
+        self.xr = QtWidgets.QLineEdit(Application)
+        self.xr.setGeometry(QtCore.QRect(70, 110, 61, 41))
         self.xr.setObjectName("xr")  # вещественная часть параметра x
-        self.xi = QtWidgets.QTextEdit(Application)
-        self.xi.setGeometry(QtCore.QRect(160, 80, 61, 41))
+        self.xi = QtWidgets.QLineEdit(Application)
+        self.xi.setGeometry(QtCore.QRect(160, 110, 61, 41))
         self.xi.setObjectName("xi")  # мнимая часть парамметра x
         self.bracket2 = QtWidgets.QLabel(Application)
-        self.bracket2.setGeometry(QtCore.QRect(230, 80, 21, 31))
+        self.bracket2.setGeometry(QtCore.QRect(230, 110, 21, 31))
         self.bracket2.setObjectName("bracket2")
         self.solve_btn = QtWidgets.QPushButton(Application)
-        self.solve_btn.setGeometry(QtCore.QRect(320, 230, 201, 51))
+        self.solve_btn.setGeometry(QtCore.QRect(260, 260, 201, 51))
         self.solve_btn.setObjectName("solve_btn")  # кнопка решения уравнения
         self.calculate_btn = QtWidgets.QPushButton(Application)
-        self.calculate_btn.setGeometry(QtCore.QRect(320, 290, 201, 51))
+        self.calculate_btn.setGeometry(QtCore.QRect(260, 320, 201, 51))
         self.calculate_btn.setObjectName("calculate_btn")  # кнопка вычисления значения многочлена
         self.x1_label = QtWidgets.QLabel(Application)
-        self.x1_label.setGeometry(QtCore.QRect(20, 130, 55, 51))
+        self.x1_label.setGeometry(QtCore.QRect(20, 160, 55, 51))
         self.x1_label.setObjectName("x1_label")
         self.x2_label = QtWidgets.QLabel(Application)
-        self.x2_label.setGeometry(QtCore.QRect(20, 190, 55, 31))
+        self.x2_label.setGeometry(QtCore.QRect(20, 220, 55, 31))
         self.x2_label.setObjectName("x2_label")
         self.value = QtWidgets.QLabel(Application)  # поле вывода значения многочлена
-        self.value.setGeometry(QtCore.QRect(710, 0, 121, 51))
+        self.value.setGeometry(QtCore.QRect(40, 60, 661, 51))
         self.value.setText("")
         self.value.setObjectName("value")
         self.plus3 = QtWidgets.QLabel(Application)
         self.plus3.setGeometry(QtCore.QRect(570, 10, 21, 31))
         self.plus3.setObjectName("plus3")
         self.plus4 = QtWidgets.QLabel(Application)
-        self.plus4.setGeometry(QtCore.QRect(140, 80, 21, 31))
+        self.plus4.setGeometry(QtCore.QRect(140, 110, 21, 31))
         self.plus4.setObjectName("plus4")
         self.x1 = QtWidgets.QLabel(Application)  # поле вывода первого корня
-        self.x1.setGeometry(QtCore.QRect(80, 130, 121, 51))
+        self.x1.setGeometry(QtCore.QRect(80, 160, 621, 51))
         self.x1.setText("")
         self.x1.setObjectName("x1")
         self.x2 = QtWidgets.QLabel(Application)  # поле вывода второго корня
-        self.x2.setGeometry(QtCore.QRect(80, 180, 121, 51))
+        self.x2.setGeometry(QtCore.QRect(80, 210, 621, 51))
         self.x2.setText("")
         self.x2.setObjectName("x2")
         self.bracket1.raise_()
@@ -113,6 +118,7 @@ class TInterface(object):
         self.cr.raise_()
         self.ci.raise_()
         self.c_coefficient.raise_()
+        self.equal.raise_()
         self.x_label.raise_()
         self.xr.raise_()
         self.xi.raise_()
@@ -130,6 +136,8 @@ class TInterface(object):
         self.retranslateUi(Application)
         QtCore.QMetaObject.connectSlotsByName(Application)
 
+        self.run()
+
     def retranslateUi(self, Application):
         _translate = QtCore.QCoreApplication.translate
         Application.setWindowTitle(_translate("Application", "Polinom application"))
@@ -139,6 +147,7 @@ class TInterface(object):
         self.plus2.setText(_translate("Application", "+"))
         self.b_coefficient.setText(_translate("Application", "i)x + ("))
         self.c_coefficient.setText(_translate("Application", "i) ="))
+        self.equal.setText(_translate("Application", "="))
         self.x_label.setText(_translate("Application", "x = ("))
         self.bracket2.setText(_translate("Application", "i)"))
         self.solve_btn.setText(_translate("Application", "solve equation"))
@@ -158,3 +167,48 @@ class TInterface(object):
     # calculate_btn - кнопка вычисления значения многочлена;
     # value - поле вывода значения многочлена;
     # x1, x2 - поля вывода корней.
+
+    def run(self):
+        self.solve_btn.clicked.connect(lambda: self.solve_equation())
+        self.calculate_btn.clicked.connect(lambda: self.calculate_polinom())
+
+    def solve_equation(self):
+        r = self.ar.text()
+        i = self.ai.text()
+        a = number(float(r), float(i))
+        r = self.br.text()
+        i = self.bi.text()
+        b = number(float(r), float(i))
+        r = self.cr.text()
+        i = self.ci.text()
+        c = number(float(r), float(i))
+        polinom = TPolinom(a, b, c)
+        d = polinom.d()
+        if d == 0:
+            x, _ = polinom.get_roots()
+            self.x1.setText(str(x))
+            self.x2.setText("no root")
+        else:
+            x1, x2 = polinom.get_roots()
+            self.x1.setText(str(x1))
+            self.x2.setText(str(x2))
+        self.value.clear()
+
+    def calculate_polinom(self):
+        r = self.ar.text()
+        i = self.ai.text()
+        a = number(float(r), float(i))
+        r = self.br.text()
+        i = self.bi.text()
+        b = number(float(r), float(i))
+        r = self.cr.text()
+        i = self.ci.text()
+        c = number(float(r), float(i))
+        r = self.xr.text()
+        i = self.xi.text()
+        x = number(float(r), float(i))
+        polinom = TPolinom(a, b, c)
+        value = polinom.get_value(x)
+        self.value.setText(str(value))
+        self.x1.clear()
+        self.x2.clear()
