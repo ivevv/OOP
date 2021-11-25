@@ -169,46 +169,52 @@ class TInterface(object):
     # x1, x2 - поля вывода корней.
 
     def run(self):
-        self.solve_btn.clicked.connect(lambda: self.solve_equation())
-        self.calculate_btn.clicked.connect(lambda: self.calculate_polinom())
+        self.solve_btn.clicked.connect(self.solve_equation)
+        self.calculate_btn.clicked.connect(self.calculate_polinom)
 
     def solve_equation(self):
-        r = self.ar.text()
-        i = self.ai.text()
-        a = number(float(r), float(i))
-        r = self.br.text()
-        i = self.bi.text()
-        b = number(float(r), float(i))
-        r = self.cr.text()
-        i = self.ci.text()
-        c = number(float(r), float(i))
-        polinom = TPolinom(a, b, c)
-        d = polinom.d()
-        if d == 0:
-            x, _ = polinom.get_roots()
-            self.x1.setText(str(x))
-            self.x2.setText("no root")
-        else:
-            x1, x2 = polinom.get_roots()
-            self.x1.setText(str(x1))
-            self.x2.setText(str(x2))
-        self.value.clear()
+        try:
+            r = self.ar.text()
+            i = self.ai.text()
+            a = number(float(r), float(i))
+            r = self.br.text()
+            i = self.bi.text()
+            b = number(float(r), float(i))
+            r = self.cr.text()
+            i = self.ci.text()
+            c = number(float(r), float(i))
+            polinom = TPolinom(a, b, c)
+            d = polinom.d()
+            if d == 0:
+                x, _ = polinom.get_roots()
+                self.x1.setText(str(x))
+                self.x2.setText("no root")
+            else:
+                x1, x2 = polinom.get_roots()
+                self.x1.setText(str(x1))
+                self.x2.setText(str(x2))
+            self.value.clear()
+        except Exception:
+            pass
 
     def calculate_polinom(self):
-        r = self.ar.text()
-        i = self.ai.text()
-        a = number(float(r), float(i))
-        r = self.br.text()
-        i = self.bi.text()
-        b = number(float(r), float(i))
-        r = self.cr.text()
-        i = self.ci.text()
-        c = number(float(r), float(i))
-        r = self.xr.text()
-        i = self.xi.text()
-        x = number(float(r), float(i))
-        polinom = TPolinom(a, b, c)
-        value = polinom.get_value(x)
-        self.value.setText(str(value))
-        self.x1.clear()
-        self.x2.clear()
+        try:
+            r = self.ar.text()
+            i = self.ai.text()
+            a = number(float(r), float(i))
+            r = self.br.text()
+            i = self.bi.text()
+            b = number(float(r), float(i))
+            r = self.cr.text()
+            i = self.ci.text()
+            c = number(float(r), float(i))
+            r = self.xr.text()
+            i = self.xi.text()
+            x = number(float(r), float(i))
+            polinom = TPolinom(a, b, c)
+            value = polinom.get_value(x)
+            self.value.setText(str(value))
+            self.x1.clear()
+            self.x2.clear()
+        except Exception:
+            pass
