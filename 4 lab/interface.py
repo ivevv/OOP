@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QWidget
 from polinom import TPolinom
-from numberh import number
+from complex import TComplex
 
 
 class TInterface(QWidget):
@@ -193,49 +193,99 @@ class TInterface(QWidget):
         self.solve_btn.clicked.connect(self.solve_equation)
         self.calculate_btn.clicked.connect(self.calculate_polinom)
 
-    def solve_equation(self):
-        try:
-            r = self.ar.text()
-            i = self.ai.text()
-            a = number(float(r), float(i))
-            r = self.br.text()
-            i = self.bi.text()
-            b = number(float(r), float(i))
-            r = self.cr.text()
-            i = self.ci.text()
-            c = number(float(r), float(i))
-            polinom = TPolinom(a, b, c)
-            d = polinom.d()
-            if d == 0:
-                x, _ = polinom.get_roots()
-                self.x1.setText(str(x))
-                self.x2.setText("no root")
-            else:
+    def real_solve(self):
+        a = self.ar.text()
+        b = self.br.text()
+        c = self.cr.text()
+        polinom = TPolinom[float](float(a), float(b), float(c))
+        d = polinom.d()
+        if d == 0:
+            x, _ = polinom.get_roots()
+            self.x1.setText(str(x))
+            self.x2.setText("no root")
+        else:
+            if d > 0:
                 x1, x2 = polinom.get_roots()
                 self.x1.setText(str(x1))
                 self.x2.setText(str(x2))
-            self.value.clear()
+            else:
+                self.x1.setText("no root")
+                self.x2.setText("no root")
+        self.ai.clear()
+        self.bi.clear()
+        self.ci.clear()
+        self.value.clear()
+
+    def real_calculate(self):
+        a = self.ar.text()
+        b = self.br.text()
+        c = self.cr.text()
+        polinom = TPolinom[float](float(a), float(b), float(c))
+        x = self.xr.text()
+        value = polinom.get_value(float(x))
+        self.value.setText(str(value))
+        self.ai.clear()
+        self.bi.clear()
+        self.ci.clear()
+        self.xi.clear()
+        self.x1.clear()
+        self.x2.clear()
+
+    def complex_solve(self):
+        r = self.ar.text()
+        i = self.ai.text()
+        a = TComplex(float(r), float(i))
+        r = self.br.text()
+        i = self.bi.text()
+        b = TComplex(float(r), float(i))
+        r = self.cr.text()
+        i = self.ci.text()
+        c = TComplex(float(r), float(i))
+        polinom = TPolinom[TComplex](a, b, c)
+        d = polinom.d()
+        if d == 0:
+            x, _ = polinom.get_roots()
+            self.x1.setText(str(x))
+            self.x2.setText("no root")
+        else:
+            x1, x2 = polinom.get_roots()
+            self.x1.setText(str(x1))
+            self.x2.setText(str(x2))
+        self.value.clear()
+
+    def complex_calculate(self):
+        r = self.ar.text()
+        i = self.ai.text()
+        a = TComplex(float(r), float(i))
+        r = self.br.text()
+        i = self.bi.text()
+        b = TComplex(float(r), float(i))
+        r = self.cr.text()
+        i = self.ci.text()
+        c = TComplex(float(r), float(i))
+        r = self.xr.text()
+        i = self.xi.text()
+        x = TComplex(float(r), float(i))
+        polinom = TPolinom[TComplex](a, b, c)
+        value = polinom.get_value(x)
+        self.value.setText(str(value))
+        self.x1.clear()
+        self.x2.clear()
+
+    def solve_equation(self):
+        try:
+            if self.real_btn.isChecked():
+                self.real_solve()
+            if self.complex_btn.isChecked():
+                self.complex_solve()
         except Exception:
             QMessageBox.warning(self, "Error", "You need to enter coefficients first!")
 
     def calculate_polinom(self):
         try:
-            r = self.ar.text()
-            i = self.ai.text()
-            a = number(float(r), float(i))
-            r = self.br.text()
-            i = self.bi.text()
-            b = number(float(r), float(i))
-            r = self.cr.text()
-            i = self.ci.text()
-            c = number(float(r), float(i))
-            r = self.xr.text()
-            i = self.xi.text()
-            x = number(float(r), float(i))
-            polinom = TPolinom(a, b, c)
-            value = polinom.get_value(x)
-            self.value.setText(str(value))
-            self.x1.clear()
-            self.x2.clear()
+            if self.real_btn.isChecked():
+                self.real_calculate()
+            if self.complex_btn.isChecked():
+                self.complex_calculate()
         except Exception:
             QMessageBox.warning(self, "Error", "You need to enter coefficients and x first!")
