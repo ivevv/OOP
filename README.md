@@ -1,1 +1,2 @@
-# OOP labs: console and GUI app for solving second degree polynomial in real and complex numbers.
+# OOP labs:
+Console -> GUI app for solving second degree polynomial in real and complex numbers.
